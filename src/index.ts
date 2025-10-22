@@ -69,7 +69,7 @@ app.use(
 
 // ************* 自訂的頂層 "中間件, 中介軟體" *************
 // JWT 解析 middleware (可選性驗證)
-app.use(jwtParseMiddleware);
+// app.use(jwtParseMiddleware);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.locals.pageName = "";
@@ -82,16 +82,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // 網站根目錄頁面
 app.get("/", (req: Request, res: Response) => {
-  res.render("home", { name: "prisma" });
+  res.json("ok");
 });
-
-app.use("/users", usersRouter);
-app.use("/try-ab", tryABRouter);
-app.use("/", mainRouter);
-
-app.use("/api", apiLoginRouter);
-app.use("/api", apiJwtLoginRouter);
-app.use("/api/contacts", apiContactsRouter);
 
 const port = +(process.env.PORT || "3002");
 app.listen(port, () => {
